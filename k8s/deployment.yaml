@@ -4,6 +4,8 @@ metadata:
   name: mario
 spec:
   replicas: 1
+  strategy:
+    type: Recreate
   selector:
     matchLabels:
       app: mario
@@ -13,7 +15,8 @@ spec:
         app: mario
     spec:
       containers:
-      - name: mario
-        image: pengbai/docker-supermario
-        ports:
-        - containerPort: 8080
+        - name: mario
+          image: 985124894155.dkr.ecr.us-east-1.amazonaws.com/mario-game:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
