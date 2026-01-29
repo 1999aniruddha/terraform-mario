@@ -4,8 +4,6 @@ metadata:
   name: mario
 spec:
   replicas: 1
-  strategy:
-    type: Recreate
   selector:
     matchLabels:
       app: mario
@@ -16,7 +14,7 @@ spec:
     spec:
       containers:
         - name: mario
-          image: 985124894155.dkr.ecr.us-east-1.amazonaws.com/mario-game:latest
+          image: 985124894155.dkr.ecr.us-east-1.amazonaws.com/mario-app:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 80
