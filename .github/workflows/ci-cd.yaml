@@ -9,7 +9,7 @@ permissions:
   contents: read
 
 env:
-  AWS_REGION: us-east-1
+  AWS_REGION: ap-south-1
   ECR_REPOSITORY: mario-app
   EKS_CLUSTER_NAME: mario-cluster
   K8S_NAMESPACE: default
@@ -27,6 +27,9 @@ jobs:
       with:
         role-to-assume: arn:aws:iam::985124894155:role/github-actions-eks
         aws-region: ${{ env.AWS_REGION }}
+        - name: Verify AWS identity
+  run: aws sts get-caller-identity
+
 
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v3
@@ -75,4 +78,5 @@ jobs:
         kubectl set image deployment/mario \
           mario=985124894155.dkr.ecr.${AWS_REGION}.amazonaws.com/$ECR_REPOSITORY:${{ github.sha }} \
           -n $K8S_NAMESPACE
+
 
