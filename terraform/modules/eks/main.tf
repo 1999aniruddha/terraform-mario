@@ -10,14 +10,23 @@ module "eks" {
   cluster_endpoint_public_access  = true
   cluster_endpoint_private_access = false
 
+  # Prevent CloudWatch log group conflicts
+  create_cloudwatch_log_group = false
+
+  # 🔐 KEEP encryption ENABLED and STABLE
+  create_kms_key = true
+
+  cluster_encryption_config = {
+    resources = ["secrets"]
+  }
+
   enable_cluster_creator_admin_permissions = true
 
   eks_managed_node_groups = {
     default = {
-      desired_size = 2
-      min_size     = 1
-      max_size     = 2
-
+      desired_size   = 2
+      min_size       = 1
+      max_size       = 2
       instance_types = ["t3.micro"]
     }
   }
