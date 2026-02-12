@@ -12,13 +12,14 @@ module "eks" {
 
   create_cloudwatch_log_group = false
 
-  # Encryption (OK to keep)
-  create_kms_key = true
+  # 🔐 USE EXISTING KMS KEY (DO NOT CREATE)
+  create_kms_key = false
+
   cluster_encryption_config = {
-    resources = ["secrets"]
+    resources        = ["secrets"]
+    provider_key_arn = "arn:aws:kms:us-east-1:985124894155:key/8df22824-1343-49f6-8457-215a8d473376"
   }
 
-  # ✅ KEEP THIS
   enable_cluster_creator_admin_permissions = true
 
   eks_managed_node_groups = {
