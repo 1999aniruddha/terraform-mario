@@ -44,9 +44,10 @@ jobs:
         working-directory: terraform
         run: terraform validate
 
-      - name: Terraform Apply (create infra if missing)
+      - name: Terraform Plan (no apply in CI)
         working-directory: terraform
-        run: terraform apply -auto-approve
+        run: terraform plan
+
 
       - name: Login to Amazon ECR
         uses: aws-actions/amazon-ecr-login@v2
