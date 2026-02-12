@@ -12,7 +12,7 @@ module "eks" {
 
   create_cloudwatch_log_group = false
 
-  # 🔐 USE EXISTING KMS KEY (DO NOT CREATE)
+  # 🔐 USE EXISTING KMS — DO NOT CREATE
   create_kms_key = false
 
   cluster_encryption_config = {
