@@ -45,14 +45,12 @@ jobs:
         run: terraform validate
 
       - name: Terraform Plan (no apply in CI)
-  working-directory: terraform
-  run: |
-    terraform plan \
-      -input=false \
-      -var="vpc_id=vpc-0e2a7aebb20c84e16" \
-      -var='subnet_ids=["subnet-0a96aa3d43a92169a","subnet-0bc25a6c8cda14e55"]'
-
-
+        working-directory: terraform
+        run: |
+          terraform plan \
+            -input=false \
+            -var="vpc_id=vpc-0e2a7aebb20c84e16" \
+            -var='subnet_ids=["subnet-0a96aa3d43a92169a","subnet-0bc25a6c8cda14e55"]'
 
       - name: Login to Amazon ECR
         uses: aws-actions/amazon-ecr-login@v2
@@ -86,3 +84,4 @@ jobs:
           kubectl set image deployment/mario \
             mario=985124894155.dkr.ecr.${AWS_REGION}.amazonaws.com/$ECR_REPOSITORY:${{ github.sha }} \
             -n $K8S_NAMESPACE
+
