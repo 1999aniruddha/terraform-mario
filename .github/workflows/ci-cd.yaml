@@ -74,12 +74,12 @@ jobs:
             --region $AWS_REGION \
             --name $EKS_CLUSTER_NAME
 
-            - name: Deploy manifests to EKS
+      - name: Deploy manifests to EKS
         run: |
           kubectl apply -f k8s/
+
       - name: Update image
         run: |
           kubectl set image deployment/mario \
             mario=985124894155.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPOSITORY:${{ github.sha }} \
             -n $K8S_NAMESPACE
-
