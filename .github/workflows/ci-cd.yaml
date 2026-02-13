@@ -12,7 +12,7 @@ permissions:
 env:
   AWS_REGION: ap-south-1
   ECR_REPOSITORY: mario-app
-  EKS_CLUSTER_NAME: mario-cluster
+  EKS_CLUSTER_NAME: mario-eks
   K8S_NAMESPACE: default
 
 jobs:
